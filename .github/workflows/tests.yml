@@ -8,7 +8,7 @@ on:
 
 jobs:
   Tests:
-    runs-on: ubuntu-latest
+    runs-on: hl
 
     services:
       postgres:
