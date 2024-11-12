@@ -5,12 +5,12 @@ namespace Tests.Unit.Application.LeavePolicies.Commands.SetLeavePolicies
     public class SetLeavePolicyCommandTests
     {
         [Fact]
-        public async Task Should_Have_Error_When_CasualLeaves_Is_Less_Then_Or_Equal_Zero()
+        public async Task Should_Have_Error_When_CasualLeaves_Is_Less_Than_Zero()
         {
             //Arrange
             var command = new SetLeavePolicyCommand()
             {
-                CasualLeaves = new Faker().Random.Int(int.MinValue, 0),
+                CasualLeaves = new Faker().Random.Int(int.MinValue, -1),
                 Holidays = new Faker().Random.Int(1, int.MaxValue),
                 EarnedLeavesPerMonth = new Faker().Random.Double(0.001, double.MaxValue)
             };
@@ -23,7 +23,7 @@ namespace Tests.Unit.Application.LeavePolicies.Commands.SetLeavePolicies
             //Assert
             result
                 .ShouldHaveValidationErrorFor(x => x.CasualLeaves)
-                .WithErrorMessage("'Casual Leaves' must be greater than '0'.");
+                .WithErrorMessage("'Casual Leaves' must be greater than or equal to '0'.");
         }
 
         [Fact]
@@ -33,7 +33,7 @@ namespace Tests.Unit.Application.LeavePolicies.Commands.SetLeavePolicies
             var command = new SetLeavePolicyCommand()
             {
                 CasualLeaves = new Faker().Random.Int(1, int.MaxValue),
-                Holidays = new Faker().Random.Int(int.MinValue, 0),
+                Holidays = new Faker().Random.Int(int.MinValue, -1),
                 EarnedLeavesPerMonth = new Faker().Random.Double(3, 4)
             };
 
@@ -45,18 +45,18 @@ namespace Tests.Unit.Application.LeavePolicies.Commands.SetLeavePolicies
             //Assert
             result
                 .ShouldHaveValidationErrorFor(x => x.Holidays)
-                .WithErrorMessage("'Holidays' must be greater than '0'.");
+                .WithErrorMessage("'Holidays' must be greater than or equal to '0'.");
         }
 
         [Fact]
-        public async Task Should_Have_Error_When_EarnedLeavesPerMonth_Is_Less_Then_Or_Equal_Zero()
+        public async Task Should_Have_Error_When_EarnedLeavesPerMonth_Is_Less_Than_Zero()
         {
             //Arrange
             var command = new SetLeavePolicyCommand()
             {
                 CasualLeaves = new Faker().Random.Int(int.MinValue, int.MaxValue),
                 Holidays = new Faker().Random.Int(int.MinValue, int.MaxValue),
-                EarnedLeavesPerMonth = new Faker().Random.Double(double.MinValue, 0)
+                EarnedLeavesPerMonth = new Faker().Random.Double(double.MinValue, -1)
             };
 
             var validator = new SetLeavePolicyCommand.Validator();
@@ -67,7 +67,7 @@ namespace Tests.Unit.Application.LeavePolicies.Commands.SetLeavePolicies
             //Assert
             result
                 .ShouldHaveValidationErrorFor(x => x.EarnedLeavesPerMonth)
-                .WithErrorMessage("'Earned Leaves Per Month' must be greater than '0'.");
+                .WithErrorMessage("'Earned Leaves Per Month' must be greater than or equal to '0'.");
         }
 
         [Fact]
@@ -76,9 +76,9 @@ namespace Tests.Unit.Application.LeavePolicies.Commands.SetLeavePolicies
             //Arrange
             var command = new SetLeavePolicyCommand()
             {
-                CasualLeaves = new Faker().Random.Int(1, int.MaxValue),
-                Holidays = new Faker().Random.Int(1, int.MaxValue),
-                EarnedLeavesPerMonth = new Faker().Random.Double(0.001, double.MaxValue)
+                CasualLeaves = new Faker().Random.Int(0, 100),
+                Holidays = new Faker().Random.Int(0, 100),
+                EarnedLeavesPerMonth = new Faker().Random.Double(0.001, 10)
             };
 
             var validator = new SetLeavePolicyCommand.Validator();

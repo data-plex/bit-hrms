@@ -28,11 +28,14 @@ namespace Tests.Unit.Domain.Employees
                 "496678543456".ToValueObject<Aadhar>());
 
             _company = Company.Create(
+                _faker.Random.Int(1),
                 _faker.Company.CompanyName(),
                 _faker.Internet.Email().ToValueObject<Email>(),
                 "1234567890".ToValueObject<PhoneNumber>(),
                 _faker.Name.FullName(),
                 _faker.Address.FullAddress());
+
+            _company.SetLeavePolicy(10, 2, 10);
         }
 
         [Fact]

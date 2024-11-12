@@ -9,6 +9,7 @@ namespace Tests.Unit.Domain.Companies
         public CompanyTests()
         {
             _company = Company.Create(
+                _faker.Random.Int(1),
                 _faker.Company.CompanyName(),
                 _faker.Internet.Email().ToValueObject<Email>(),
                 "1234567890".ToValueObject<PhoneNumber>(),
