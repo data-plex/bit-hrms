@@ -1,7 +1,7 @@
-import { PageContainer, PageHeader, BreadCrumbProps, EmployeeDropdown, ActionButton, AddButton } from '@/lib/components';
+import { PageContainer, PageHeader, BreadCrumbProps, EmployeeDropdown, AddButton } from '@/lib/components';
 
 import { columns } from './columns';
-import { Card, CardContent, Button, ClientSideDataTable, useSimpleModal, Container } from 'xplorer-ui';
+import { Card, CardContent, ClientSideDataTable, useSimpleModal, Container } from 'xplorer-ui';
 import { useLocation } from 'react-router-dom';
 import { useGetCompensationQuery } from '@/lib/rtk/rtk.salary';
 import _ from 'lodash';
