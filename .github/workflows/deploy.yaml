@@ -6,7 +6,7 @@ on:
 
 jobs:
   Deployment:
-    runs-on: lab
+    runs-on: home-lab
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
