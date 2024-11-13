@@ -8,7 +8,7 @@ on:
 
 jobs:
   Tests:
-    runs-on: hl
+    runs-on: lab
 
     services:
       postgres:
